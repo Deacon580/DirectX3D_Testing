@@ -2,8 +2,15 @@
 #include "WinDecs.h"
 #include <d3d11.h>
 #include <wrl.h>
+#include <vector>
+#include <d3dcompiler.h>
+#include <DirectXMath.h>
+#include <memory>
+#include <random>
 
-class Graphics {
+class Graphics
+{
+	friend class Bindable;
 public:
 	Graphics(HWND hWnd);
 	Graphics(const Graphics&) = delete;
@@ -11,8 +18,11 @@ public:
 	~Graphics() = default;
 	void EndFrame();
 	void ClearBuffer(float red, float green, float blue) noexcept;
-	void DrawTestTriangle(float angle, float x, float z);
+	void DrawIndexed(UINT count) noexcept;
+	void SetProjection(DirectX::FXMMATRIX proj) noexcept;
+	DirectX::XMMATRIX GetProjection() const noexcept;
 private:
+	DirectX::XMMATRIX projection;
 	Microsoft::WRL::ComPtr<ID3D11Device> pDevice;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> pSwap;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;
