@@ -12,7 +12,7 @@ App::App()
 	std::uniform_real_distribution<float> ddist(0.0f, 3.1415f * 2.0f);
 	std::uniform_real_distribution<float> odist(0.0f, 3.1415f * 0.3f);
 	std::uniform_real_distribution<float> rdist(6.0f, 20.0f);
-	for (auto i = 0; i < 80; i++)
+	for (auto i = 0; i < 10; i++)
 	{
 		boxes.push_back(std::make_unique<Box>(
 			wnd.Gfx(), rng, adist,
@@ -37,7 +37,7 @@ App::~App()
 
 void App::DoFrame() {
 	auto dt = timer.Mark();
-	wnd.Gfx().ClearBuffer(0.07f, 0.0f, 0.12f);
+	wnd.Gfx().ClearBuffer(0.0f, 0.0f, 0.0f);
 	for (auto& b : boxes)
 	{
 		b->Update(dt);
